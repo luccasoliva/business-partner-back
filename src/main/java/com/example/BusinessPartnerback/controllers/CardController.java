@@ -8,35 +8,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/card")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://business-partner-front.vercel.app/")
 public class CardController {
 
     private final CardService cardService;
 
 
-    @GetMapping("/card")
+    @GetMapping
     public List<Card> getAllCards() {
         return cardService.getAllCards();
     }
 
-    @GetMapping("/card/{cardCode}")
+    @GetMapping("/{cardCode}")
     public Card getCardByCardCode(@PathVariable String cardCode) {
         return cardService.findCardByCardCode(cardCode);
     }
 
-    @PostMapping("/card")
+    @PostMapping
     public Card createNewCard(@RequestBody Card card) {
         return cardService.createNewCard(card);
     }
 
-    @PutMapping("/card/{cardCode}")
+    @PutMapping("/{cardCode}")
     public Card updateCard(@RequestBody Card card, @PathVariable String cardCode) {
         return cardService.updateCard(card, cardCode);
     }
 
-    @DeleteMapping("/card/{cardCode}")
+    @DeleteMapping("/{cardCode}")
     public void deleteCard(@PathVariable String cardCode) {
         cardService.deleteCard(cardCode);
     }
