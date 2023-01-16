@@ -1,4 +1,4 @@
-package com.example.BusinessPartnerback;
+package com.example.businesspartnerback;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

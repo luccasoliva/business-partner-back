@@ -1,4 +1,4 @@
-package com.example.BusinessPartnerback;
+package com.example.businesspartnerback;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
