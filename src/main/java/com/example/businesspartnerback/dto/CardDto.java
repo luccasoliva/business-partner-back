@@ -13,6 +13,7 @@ public record CardDto(Integer cardCode,
                       String cardName,
                       String avatar,
                       String address,
-                      String zipCode,
-                      Boolean isPublic) implements Serializable {
+                      String tel,
+                      String email,
+                      String description) {
 }

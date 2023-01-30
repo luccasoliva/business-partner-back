@@ -23,19 +23,17 @@ public class Card {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
     private String cardName;
 
     private String avatar;
 
-    @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
-    private String zipCode;
+    private String tel;
 
-    @Column(nullable = false)
-    private Boolean isPublic;
+    private String email;
+
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "ownerId")

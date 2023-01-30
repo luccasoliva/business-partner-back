@@ -11,20 +11,22 @@ public class CardMapper {
         return CardDto.builder()
                 .cardCode(card.getCardCode())
                 .cardName(card.getCardName())
-                .zipCode(card.getZipCode())
-                .address(card.getAddress())
                 .avatar(card.getAvatar())
-                .isPublic(card.getIsPublic())
+                .address(card.getAddress())
+                .tel(card.getTel())
+                .email(card.getEmail())
+                .description(card.getDescription())
                 .build();
     }
 
     public Card toEntity(CardDto cardDto){
         return Card.builder()
                 .cardName(cardDto.cardName())
-                .zipCode(cardDto.zipCode())
-                .address(cardDto.address())
                 .avatar(cardDto.avatar())
-                .isPublic(cardDto.isPublic())
+                .address(cardDto.address())
+                .tel(cardDto.tel())
+                .email(cardDto.email())
+                .description(cardDto.description())
                 .build();
     }
 }

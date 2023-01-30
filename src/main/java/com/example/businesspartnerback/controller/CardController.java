@@ -17,18 +17,15 @@ import java.util.List;
 @AllArgsConstructor
 public class CardController {
     private final CardService cardService;
-    @GetMapping("/public")
-    public ResponseEntity<List<CardDto>> getAllPublicCards(){
-        return ResponseEntity.ok(cardService.listAllPublicCards());
-    }
 
-    @GetMapping("/private")
-    public ResponseEntity<List<CardDto>> getAllCardsByOwnerId(Principal principal){
-        return ResponseEntity.ok(cardService.findAllCardsByOwnerId(principal.getName()));
+
+    @GetMapping
+    public ResponseEntity<List<CardDto>> getAllCardsByOwner(Principal principal){
+        return ResponseEntity.ok(cardService.findAllCardsByOwner(principal.getName()));
     }
 
     @PostMapping
-    public ResponseEntity<CardDto> createCard(CardDto cardDto, Principal principal){
+    public ResponseEntity<CardDto> createCard(@RequestBody CardDto cardDto, Principal principal){
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{cardCode}")
@@ -36,7 +33,7 @@ public class CardController {
                 .toUri();
 
         cardService.createCard(cardDto, principal.getName());
-
+        System.out.println(cardDto);
         return ResponseEntity.created(location).body(cardDto);
     }
 
@@ -46,5 +43,12 @@ public class CardController {
         cardService.deleteCard(cardCode, principal.getName());
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping
+    public ResponseEntity<CardDto> updateCard(CardDto cardDto, Principal principal){
+        cardService.updateCard(cardDto, principal.getName());
+        return ResponseEntity.ok(cardDto);
+    }
+
 
 }

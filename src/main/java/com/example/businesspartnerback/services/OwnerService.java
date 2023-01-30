@@ -16,7 +16,7 @@ public class OwnerService {
 
         ownerRepository.findByEmail(ownerDto.email())
                 .ifPresent(owner -> {
-                    throw new IllegalStateException("User already exists");
+                    throw new IllegalStateException("Usuário com email "+ownerDto.email()+" já cadastrado");
                 });
 
         if(ownerDto.password().isEmpty() || ownerDto.email().isEmpty()){

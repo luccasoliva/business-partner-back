@@ -21,17 +21,8 @@ public class CardService {
     private CardMapper cardMapper;
     private final OwnerRepository ownerRepository;
 
-    public List<CardDto> listAllPublicCards() {
 
-        return cardRepository.findAll()
-                .stream()
-                .filter(Card::getIsPublic)
-                .map(cardMapper::toDto)
-                .limit(10)
-                .toList();
-    }
-
-    public List<CardDto> findAllCardsByOwnerId(String email) {
+    public List<CardDto> findAllCardsByOwner(String email) {
 
         return cardRepository
                 .findAllCardsByOwnerId(ownerRepository
@@ -61,6 +52,22 @@ public class CardService {
             cardRepository.delete(card);
         } else {
             throw new IllegalStateException("You can't delete this card");
+        }
+    }
+
+    //update method
+    public void updateCard(CardDto cardDto, String email) {
+        Owner owner = ownerRepository.findByEmail(email)
+                .stream()
+                .findFirst()
+                .orElseThrow();
+
+        Card card = cardRepository.findByCardCode(cardDto.cardCode());
+
+        if (Objects.equals(card.getOwner().getOwnerId(), owner.getOwnerId())) {
+            cardRepository.save(cardMapper.toEntity(cardDto));
+        } else {
+            throw new IllegalStateException("You can't update this card");
         }
     }
 }
